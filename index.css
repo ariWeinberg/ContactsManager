@@ -1,0 +1,251 @@
+:root {
+    --primary: #6366f1; /* Vibrant Indigo */
+    --primary-hover: #4f46e5;
+    --primary-light: #eef2ff;
+    --bg-main: #f1f5f9;
+    --sidebar-bg: #ffffff;
+    --text-dark: #0f172a;
+    --text-muted: #64748b;
+    --danger: #ef4444;
+    --danger-hover: #dc2626;
+    --success: #10b981;
+    --border: #e2e8f0;
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+body, html {
+    margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg-main); height: 100vh; overflow: hidden;
+}
+
+#app-wrapper { display: flex; height: 100vh; }
+
+/* Sidebar */
+.sidebar {
+    width: 340px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.02);
+}
+
+.search-box { padding: 25px 20px; border-bottom: 1px solid var(--border); }
+.search-box input {
+    width: 100%; padding: 12px 15px; border-radius: 10px;
+    border: 2px solid var(--border); outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+.search-box input:focus { border-color: var(--primary); }
+
+.card-list {
+    list-style: none; padding: 15px; margin: 0;
+    overflow-y: auto; flex: 1;
+}
+
+.card-item {
+    padding: 16px; border-radius: 12px; cursor: pointer;
+    margin-bottom: 12px; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+    background: #fff;
+}
+.card-item:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.card-item.selected { 
+    background: var(--primary-light); 
+    border-color: var(--primary); 
+    box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+}
+
+.card-title { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text-dark); }
+.card-description { font-size: 0.85rem; color: var(--text-muted); margin: 6px 0 0; }
+
+.add-contact-btn {
+    border: 2px dashed var(--primary); background: #fcfcff; color: var(--primary);
+    display: flex; align-items: center; justify-content: center;
+}
+.add-contact-btn:hover { background: var(--primary-light); }
+
+/* Main Content */
+#main-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; }
+
+.details-panel {
+    width: 100%; max-width: 650px; background: white;
+    padding: 40px; border-radius: 24px; box-shadow: var(--shadow);
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.info-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.info-header h2 { margin: 0; font-size: 1.8rem; color: var(--text-dark); }
+
+.actions { display: flex; gap: 12px; }
+button {
+    padding: 10px 18px; border-radius: 10px; border: none; cursor: pointer; 
+    font-weight: 600; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-save { background: var(--primary); color: white; }
+.btn-save:hover { background: var(--primary-hover); }
+.btn-cancel { background: var(--danger); color: white; }
+.btn-cancel:hover { background: var(--danger-hover); }
+
+/* Custom Fields */
+.fields-list { margin-top: 25px; display: flex; flex-direction: column; gap: 10px; }
+.custom-field { 
+    background: #f8fafc; padding: 14px 18px; border-radius: 12px; 
+    border: 1px solid var(--border); transition: border-color 0.2s;
+}
+.custom-field:hover { border-color: var(--primary); }
+
+.field-info { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.field-icon { font-size: 1.2rem; margin-right: 12px; }
+.field-actions { display: flex; gap: 8px; }
+
+.edit-field-btn, .delete-field-btn {
+    padding: 6px; background: white; border: 1px solid var(--border); 
+    border-radius: 6px; font-size: 0.9rem;
+}
+.edit-field-btn:hover { border-color: var(--primary); color: var(--primary); }
+.delete-field-btn:hover { border-color: var(--danger); color: var(--danger); }
+
+.custom-field-create-btn {
+    margin-top: 15px; padding: 14px; border: 2px dashed var(--primary);
+    color: var(--primary); border-radius: 12px; text-align: center; 
+    cursor: pointer; font-weight: 700; background: #fff; transition: all 0.2s;
+}
+.custom-field-create-btn:hover { background: var(--primary-light); }
+
+/* Modals */
+.modal-overlay {
+    position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6);
+    display: flex; align-items: center; justify-content: center; 
+    backdrop-filter: blur(6px); z-index: 1000;
+}
+.modal-content {
+    background: white; padding: 35px; border-radius: 20px; width: 400px;
+    display: flex; flex-direction: column; gap: 18px; box-shadow: var(--shadow);
+}
+.modal-content h3 { margin: 0 0 5px 0; color: var(--text-dark); }
+.modal-content input, .modal-content select { 
+    padding: 12px; border: 2px solid var(--border); border-radius: 10px; outline: none; font-size: 1rem;
+}
+.modal-content input:focus { border-color: var(--primary); }
+
+/* Confirmation Specifics */
+.confirm-modal { text-align: center; width: 320px; }
+.confirm-modal p { font-weight: 500; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 20px; }
+.modal-actions { display: flex; gap: 10px; justify-content: center; }
+
+hr { border: 0; border-top: 1px solid var(--border); margin: 25px 0; }
+
+
+.list-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures the container is at least the height of the viewport */
+}
+
+.scroll-wrapper {
+    /* This section will take up the available space and enable scrolling */
+    overflow-y: auto;
+    flex-grow: 1; /* Allows it to expand and fill available space */
+}
+
+.list-one, .list-two {
+    /* Basic styling for the scrolling lists */
+    padding: 20px;
+    margin: 0;
+    list-style: none;
+}
+
+.list-three {
+    /* This list will stick to the bottom */
+    margin-top: auto; /* Pushes it to the bottom within the flex container */
+    padding: 20px;
+    background-color: #f0f0f0;
+    /* You can add more styling here */
+    list-style: none;
+}
+/* הקונטיינר הראשי של כל הרשימות */
+.sidebar-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* תופס את כל גובה ה-sidebar */
+    overflow: hidden; /* מונע גלילה של הקונטיינר עצמו */
+}
+
+/* אזור הגלילה המרכזי */
+.scroll-area {
+    flex: 1; /* אומר לאזור הזה למלא את כל המקום הפנוי */
+    overflow-y: auto; /* מאפשר גלילה רק כאן */
+    padding: 15px;
+}
+
+/* אזורי הקיבוע */
+.sticky-header, .sticky-footer {
+    flex-shrink: 0; /* מונע מהם להתכווץ */
+    padding: 15px;
+    background: var(--sidebar-bg); /* רקע לבן כדי שלא יראו תוכן מתחת */
+    z-index: 10;
+}
+
+.sticky-header { border-bottom: 1px solid var(--border); }
+.sticky-footer { border-top: 1px solid var(--border); }
+
+/* ביטול המרווח האחרון בתוך אזורי הקיבוע */
+.sticky-header .card-item, .sticky-footer .card-item {
+    margin-bottom: 0;
+}
+
+
+
+
+
+
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.toast {
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    min-width: 250px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.hide {
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/* Severity Colors */
+.toast.ok { background-color: #28a745; } /* Green */
+.toast.info { background-color: #007bff; } /* Blue */
+.toast.warning { background-color: #ffc107; color: black; } /* Yellow */
+.toast.failed { background-color: #dc3545; } /* Red */

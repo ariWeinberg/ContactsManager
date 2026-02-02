@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="he" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contacts manager</title>
+    <link rel="stylesheet" href="./index.css" />
+</head>
+<body>
+    <div id="app-wrapper">
+        <aside class="sidebar">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search contact..." oninput="searchContacts(this.value)">
+            </div>
+            <ul id="card-container" class="card-list">
+            </ul>
+        </aside>
+        
+        <div class="toast-container" id="toast-container"></div>
+
+        <main id="main-container">
+            <div id="details-panel" class="details-panel">
+                <div class="empty-state">select a contact from the list to view hes details</div>
+            </div>
+        </main>
+    </div>
+    <script src="./index.js"></script>
+</body>
+</html>
